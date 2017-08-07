@@ -4,6 +4,7 @@ A mix of Docker, TIck, Elk and all the good good clouds
 
 ## Requirements
 
+See both .travis.yml and requirements.txt for details but for the most part the following is what one needs to test/deploy.
 - docker-machine
 - docker-compose
 - docker-ce engine
