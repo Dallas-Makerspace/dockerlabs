@@ -2,3 +2,4 @@ yamllint
 boto
 openstackclient
 ansible
+autoenv
