@@ -1,3 +1,23 @@
+sudo: required
+
+services:
+  - docker  
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.4.2
+  - DOCKER_MACHINE_VERSION=v0.12.2
+
+before_install:
+  - sudo rm /usr/local/bin/docker-{machine,compose}
+  - sudo install -m 755 /dev/null /usr/local/bin/docker-machine
+  - sudo install -m 755 /dev/null /usr/local/bin/docker-compose
+  - sudo curl -L https://github.com/docker/machine/releases/download/${DOCKER_MACHINE_VERSION}/docker-machine-`uname -s`-`uname -m` -o /usr/local/bin/docker-machine
+  - sudo curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m`-o /usr/local/bin/docker-compose
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+  
 language: python
 python:
   - "2.7"
@@ -5,4 +25,4 @@ python:
 # command to install dependencies
 install: "pip install -r requirements.txt"
 # command to run tests
-script: pytest
+script: yamllint docker-compose.yml
