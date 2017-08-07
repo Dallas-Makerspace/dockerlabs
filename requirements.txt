@@ -1,1 +1,4 @@
 yamllint
+boto
+openstackclient
+ansible
